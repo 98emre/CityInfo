@@ -1,0 +1,37 @@
+
+@schema=http
+@hostname=localhost
+@port=5102
+
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkVzY28iLCJmYW1pbHlfbmFtZSI6IlBhYmxvIiwiY2l0eSI6IlBhcmlzIiwibmJmIjoxNzE2NDg1MTU3LCJleHAiOjE3MTY0ODg3NTcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTEwMiIsImF1ZCI6ImNpdHlpbmZvYXBpIn0.4Fp-wDBEmc4hnmhxZHAWK8QtrPgWzd2bj1N9Lo0VOWs
+
+###
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities
+Accept: application/xml
+
+###
+POST {{schema}}://{{hostname}}:{{port}}/api/v2/cities/1/pointsofinterest
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "A name for testing",
+  "description": "A description for testing"
+}
+
+###
+
+@poiid = {{createpoi.response.body.id}}
+
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities/1/pointsofinterest/{{poiid}}
+Accept: application/json
+
+###
+POST {{schema}}://{{hostname}}:{{port}}/api/authentication/authenticate
+Content-Type: application/json
+
+{
+  "name": "EscoPablo",
+  "password": "This is relatively long sentence that acts as my password."
+}
